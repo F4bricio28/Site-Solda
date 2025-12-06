@@ -18,6 +18,12 @@
             cursor: url('MiddleFinger.png'), auto;
         }
 
+        /* --- CORES NOVAS --- */
+        :root {
+            --cor-rosa-novo: #DC143C; /* Vermelho mais Carmesim */
+            --cor-azul-novo: #006064; /* Azul Petróleo (esverdeado) */
+        }
+
         /* --- MENUS E SIDEBAR --- */
         #sidebar-strip {
             position: fixed; top: 0; left: 0; width: 50px; height: 100vh;
@@ -27,15 +33,13 @@
         }
         #sidebar-strip:hover { background-color: #444; }
 
-        /* O Menu que abre */
         #hidden-menu {
-            position: fixed; top: 0; left: -250px; /* Escondido na esquerda */
+            position: fixed; top: 0; left: -250px;
             width: 250px; height: 100vh; background-color: #1a1a1a;
             z-index: 150; transition: left 0.3s ease;
-            padding-top: 60px; border-right: 2px solid #D61C4E;
+            padding-top: 60px; border-right: 2px solid var(--cor-rosa-novo);
             box-shadow: 5px 0 15px rgba(0,0,0,0.5);
         }
-        /* Classe para mostrar o menu */
         #hidden-menu.menu-open { left: 50px; }
 
         .menu-item {
@@ -43,31 +47,34 @@
             font-size: 1.2rem; border-bottom: 1px solid #333; cursor: pointer;
             transition: 0.2s;
         }
-        .menu-item:hover { background-color: #D61C4E; color: #000; font-weight: bold; }
+        .menu-item:hover { background-color: var(--cor-rosa-novo); color: #fff; font-weight: bold; }
 
-        /* --- GERENCIAMENTO DE PÁGINAS (ABAS) --- */
+        /* --- GERENCIAMENTO DE PÁGINAS --- */
         .page-content {
-            display: none; /* Todas começam escondidas */
-            margin-left: 50px; width: calc(100% - 50px);
+            display: none; margin-left: 50px; width: calc(100% - 50px);
             animation: fadeIn 0.5s;
         }
-        /* Apenas a que tiver a classe active aparece */
         .page-content.active { display: block; }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- ESTILOS ORIGINAIS DA HOME --- */
-        #main-container { padding-bottom: 50px; } /* Mantido para compatibilidade */
+        /* --- ESTILOS GERAIS --- */
+        #main-container { padding-bottom: 50px; }
         
         header {
-            background-color: #D61C4E; color: #0A1172; padding: 40px;
+            background-color: var(--cor-rosa-novo); 
+            color: #fff; /* Texto branco no header pra contrastar com o vermelho */
+            padding: 40px;
             display: flex; align-items: center; justify-content: space-between;
-            border-bottom: 4px solid #0A1172;
+            border-bottom: 4px solid var(--cor-azul-novo);
         }
         .header-text { width: 70%; }
-        .header-text h1 { font-size: 3rem; text-transform: uppercase; margin-bottom: 10px; text-shadow: 1px 1px 0px rgba(255,255,255,0.3); }
-        .header-text p { font-size: 1.2rem; font-weight: bold; }
-        .header-img { width: 150px; height: 150px; background-color: #fff; border: 5px solid #0A1172; object-fit: cover; }
+        .header-text h1 { 
+            font-size: 3rem; text-transform: uppercase; margin-bottom: 0; 
+            text-shadow: 2px 2px 0px var(--cor-azul-novo);
+        }
+        /* Subtítulo removido no HTML */
+        
+        .header-img { width: 150px; height: 150px; background-color: #fff; border: 5px solid var(--cor-azul-novo); object-fit: cover; }
 
         .content-section { display: flex; align-items: center; justify-content: center; padding: 50px; gap: 40px; min-height: 400px; border-bottom: 1px solid #333; }
         .reverse { flex-direction: row-reverse; }
@@ -77,17 +84,14 @@
         /* --- ESTILOS DO GAYDAR --- */
         .gaydar-container {
             max-width: 600px; margin: 50px auto; padding: 30px;
-            background: #111; border: 2px solid #D61C4E; border-radius: 15px;
-            text-align: center; box-shadow: 0 0 20px rgba(214, 28, 78, 0.3);
+            background: #111; border: 2px solid var(--cor-rosa-novo); border-radius: 15px;
+            text-align: center; box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
         }
-        .gaydar-title { font-size: 2.5rem; color: #D61C4E; margin-bottom: 30px; text-transform: uppercase; }
+        .gaydar-title { font-size: 2.5rem; color: var(--cor-rosa-novo); margin-bottom: 30px; text-transform: uppercase; }
         
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-group label { display: block; margin-bottom: 5px; color: #aaa; }
-        .form-group input {
-            width: 100%; padding: 10px; background: #222; border: 1px solid #444;
-            color: white; border-radius: 5px; font-size: 1rem;
-        }
+        .form-group input { width: 100%; padding: 10px; background: #222; border: 1px solid #444; color: white; border-radius: 5px; font-size: 1rem; }
         
         .btn-gaydar {
             background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff);
@@ -95,32 +99,67 @@
             border-radius: 30px; cursor: pointer; transition: transform 0.2s; margin-top: 10px;
         }
         .btn-gaydar:active { transform: scale(0.95); }
-
-        #resultado-gaydar {
-            margin-top: 30px; display: none; padding: 20px; background: #222; border-radius: 10px;
-        }
+        #resultado-gaydar { margin-top: 30px; display: none; padding: 20px; background: #222; border-radius: 10px; }
         #porcentagem-txt { font-size: 3rem; font-weight: bold; color: #ff00d4; }
-        .flag-img { width: 100px; margin-top: 10px; animation: tremer 0.5s infinite; }
+        .flag-emoji { font-size: 80px; margin-top: 10px; display: block; animation: tremer 0.5s infinite; }
 
-        /* --- RODAPÉ AUDIO --- */
+        /* --- ESTILOS DO TERMO --- */
+        .termo-container {
+            max-width: 500px; margin: 30px auto; text-align: center;
+        }
+        .termo-title { font-size: 2rem; color: #fff; margin-bottom: 20px; letter-spacing: 5px; }
+        
+        .termo-grid {
+            display: grid; grid-template-rows: repeat(6, 1fr); gap: 5px; margin-bottom: 20px;
+            justify-content: center;
+        }
+        .termo-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+        .termo-box {
+            width: 50px; height: 50px; border: 2px solid #555;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: bold; text-transform: uppercase;
+            background: #111;
+        }
+        /* Cores do Termo */
+        .correct { background-color: #3aa394; border-color: #3aa394; } /* Verde */
+        .present { background-color: #d3ad69; border-color: #d3ad69; } /* Amarelo */
+        .absent { background-color: #313233; border-color: #313233; } /* Cinza */
+
+        .termo-msg {
+            color: #00ff00; font-size: 1.5rem; font-weight: bold; 
+            margin-top: 20px; display: none; text-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Teclado Virtual */
+        .keyboard { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .key-row { display: flex; gap: 6px; }
+        .key {
+            padding: 10px 15px; background: #555; border-radius: 4px; font-weight: bold; cursor: pointer;
+            text-transform: uppercase; user-select: none;
+        }
+        .key:active { background: #777; }
+        .key-big { padding: 10px 20px; }
+
+
+        /* --- ANUNCIO / AUDIO (MANTIDOS) --- */
+        @keyframes tremer { 0% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } 100% { transform: rotate(0deg); } }
+        
         .footer-audio { text-align: center; padding: 60px 20px; background-color: #111; border-top: 2px solid #333; }
         .whatsapp-player { background-color: #005c4b; width: 300px; padding: 10px 15px; border-radius: 10px; border-top-left-radius: 0; display: flex; align-items: center; margin: 0 auto; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
         .whatsapp-player::before { content: ""; position: absolute; top: 0; left: -10px; width: 0; height: 0; border-top: 15px solid #005c4b; border-left: 15px solid transparent; }
-        .wa-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #ccc; margin-right: 10px; background-image: url('solda_header.jpg'); background-size: cover; }
+        .wa-avatar { width: 40px; height: 40px; border-radius: 50%; background-color: #ccc; margin-right: 10px; background-image: url('solda_header.png'); background-size: cover; }
         .wa-play-btn { background: none; border: none; cursor: pointer; color: #aebac1; font-size: 24px; margin-right: 10px; display: flex; align-items: center; justify-content: center; }
         .wa-progress-container { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .wa-slider { -webkit-appearance: none; width: 100%; height: 25px; background: transparent; cursor: pointer; position: relative; margin-bottom: 5px; background-image: repeating-linear-gradient(90deg, #647f7a 0px, #647f7a 2px, transparent 2px, transparent 5px); background-size: 100% 50%; background-repeat: no-repeat; background-position: center; }
         .wa-slider::-webkit-slider-thumb { -webkit-appearance: none; height: 14px; width: 14px; border-radius: 50%; background: #fff; cursor: pointer; margin-top: 0px; box-shadow: 0 1px 3px rgba(0,0,0,0.5); }
         .wa-time { font-size: 0.75rem; color: #aebac1; align-self: flex-end; margin-top: -5px; }
 
-        /* --- ANÚNCIO --- */
         #overlay-safado { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 9998; }
         .anuncio-box { background-color: #ffec00; border: 4px solid #cc0000; padding: 20px; max-width: 350px; text-align: center; color: #000; font-family: 'Impact', sans-serif; position: relative; box-shadow: 5px 5px 15px rgba(0,0,0,0.5); }
         .anuncio-box h2 { font-size: 2rem; margin: 0; color: #cc0000; text-transform: uppercase; }
         .anuncio-box h3 { color: #cc0000; margin-top: 5px; font-size: 1.2rem; }
         .foto-vitima { width: 200px; height: 200px; object-fit: cover; border: 3px solid #cc0000; margin: 15px auto; display: block; background-color: #fff; }
         .close-btn { position: absolute; top: -15px; right: -15px; background: #cc0000; color: white; width: 35px; height: 35px; line-height: 35px; border-radius: 50%; font-family: Arial, sans-serif; font-weight: bold; cursor: pointer; border: 2px solid white; z-index: 9999; font-size: 18px; }
-        .close-btn:hover { background-color: red; }
         .btn-clique { padding: 10px 20px; font-size: 18px; background: #cc0000; color: yellow; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; width: 100%; }
 
         @media (max-width: 768px) {
@@ -128,7 +167,8 @@
             .header-text h1 { font-size: 2rem; }
             header { flex-direction: column; text-align: center; gap: 20px; }
             .header-text { width: 100%; }
-            .page-content { margin-left: 0; width: 100%; padding-left: 50px; } /* Ajuste mobile */
+            .page-content { margin-left: 0; width: 100%; padding-left: 50px; }
+            .termo-box { width: 40px; height: 40px; } /* Menor no celular */
         }
     </style>
 </head>
@@ -139,17 +179,17 @@
     </div>
 
     <div id="hidden-menu">
-        <div class="menu-item" onclick="navigate('home')">🏠 Início</div>
-        <div class="menu-item" onclick="navigate('gaydar')">🏳️‍🌈 Gaydar 3000</div>
-        <div class="menu-item" onclick="alert('Em breve: Jogo do Clicker!')">🔒 Em breve</div>
+        <div class="menu-item" onclick="navigate('home')">Início</div>
+        <div class="menu-item" onclick="navigate('gaydar')">Gaydar</div>
+        <div class="menu-item" onclick="navigate('termo')">Termo</div>
+        <a href="https://www.instagram.com/suspamigos" target="_blank" class="menu-item">Conheça mais</a>
     </div>
 
     <div id="page-home" class="page-content active">
         <header>
             <div class="header-text">
                 <h1>SOLDA HOMEMSEXUAL</h1>
-                <p>O mito, a lenda, o estudo.</p>
-            </div>
+                </div>
             <img src="solda_header.png" alt="Header" class="header-img">
         </header>
 
@@ -196,28 +236,52 @@
 
     <div id="page-gaydar" class="page-content">
         <div class="gaydar-container">
-            <h1 class="gaydar-title">🏳️‍🌈 GAYDAR 3000 🏳️‍🌈</h1>
-            <p style="margin-bottom: 20px;">Nosso algoritmo avançado de IA detecta a homossexualidade com 99.9% de precisão.</p>
+            <h1 class="gaydar-title">GAYDAR</h1> <p style="margin-bottom: 20px;">Algoritmo avançado de detecção.</p>
             
             <div class="form-group">
-                <label>Nome do Suspeito:</label>
-                <input type="text" id="g-name" placeholder="Ex: Solda">
+                <label>Nome:</label>
+                <input type="text" id="g-name">
             </div>
             <div class="form-group">
                 <label>Idade:</label>
-                <input type="number" id="g-age" placeholder="Ex: 24">
+                <input type="number" id="g-age">
             </div>
             <div class="form-group">
                 <label>Curso:</label>
-                <input type="text" id="g-course" placeholder="Ex: Engenharia">
+                <input type="text" id="g-course">
             </div>
 
             <button class="btn-gaydar" onclick="calcularGaydar()">CALCULAR</button>
 
             <div id="resultado-gaydar">
-                <p>NÍVEL DE GAYZICE DETECTADO:</p>
+                <p>NÍVEL DETECTADO:</p>
                 <div id="porcentagem-txt">0%</div>
-                <img src="flag.png" class="flag-img" alt="Bandeira">
+                <div class="flag-emoji">🏳️‍🌈</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-termo" class="page-content">
+        <div class="termo-container">
+            <h1 class="termo-title">TERMO DO SOLDA</h1>
+            
+            <div id="termo-board" class="termo-grid">
+                </div>
+
+            <div id="termo-msg" class="termo-msg">Solda sempre é a solução</div>
+
+            <div class="keyboard">
+                <div class="key-row">
+                    <div class="key" onclick="pressKey('Q')">Q</div><div class="key" onclick="pressKey('W')">W</div><div class="key" onclick="pressKey('E')">E</div><div class="key" onclick="pressKey('R')">R</div><div class="key" onclick="pressKey('T')">T</div><div class="key" onclick="pressKey('Y')">Y</div><div class="key" onclick="pressKey('U')">U</div><div class="key" onclick="pressKey('I')">I</div><div class="key" onclick="pressKey('O')">O</div><div class="key" onclick="pressKey('P')">P</div>
+                </div>
+                <div class="key-row">
+                    <div class="key" onclick="pressKey('A')">A</div><div class="key" onclick="pressKey('S')">S</div><div class="key" onclick="pressKey('D')">D</div><div class="key" onclick="pressKey('F')">F</div><div class="key" onclick="pressKey('G')">G</div><div class="key" onclick="pressKey('H')">H</div><div class="key" onclick="pressKey('J')">J</div><div class="key" onclick="pressKey('K')">K</div><div class="key" onclick="pressKey('L')">L</div>
+                </div>
+                <div class="key-row">
+                    <div class="key key-big" onclick="pressKey('ENTER')">ENTER</div>
+                    <div class="key" onclick="pressKey('Z')">Z</div><div class="key" onclick="pressKey('X')">X</div><div class="key" onclick="pressKey('C')">C</div><div class="key" onclick="pressKey('V')">V</div><div class="key" onclick="pressKey('B')">B</div><div class="key" onclick="pressKey('N')">N</div><div class="key" onclick="pressKey('M')">M</div>
+                    <div class="key key-big" onclick="pressKey('DEL')">⌫</div>
+                </div>
             </div>
         </div>
     </div>
@@ -229,102 +293,163 @@
             <h3>SOLTEIROS DISPONÍVEIS</h3>
             <img id="img-do-anuncio" src="" alt="Garanhão" class="foto-vitima">
             <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">"Acha que tens oque é preciso para esbagaçares o meu Fuleco?"</p>
-            <button class="btn-clique" onclick="window.open('https://www.instagram.com/suspamigos?utm_source=ig_web_button_share_sheet&igsh=MTA4eDkzajdlY2RrNg==', '_blank')">
+            <button class="btn-clique" onclick="window.open('https://www.instagram.com/suspamigos', '_blank')">
                 CLIQUE PARA VER O PERFIL
             </button>
         </div>
     </div>
 
     <script>
-        // --- NAVEGAÇÃO ENTRE ABAS ---
-        function toggleMenu() {
-            const menu = document.getElementById('hidden-menu');
-            menu.classList.toggle('menu-open');
-        }
-
+        // --- NAVEGAÇÃO ---
+        function toggleMenu() { document.getElementById('hidden-menu').classList.toggle('menu-open'); }
         function navigate(pageId) {
-            // Fecha o menu
             document.getElementById('hidden-menu').classList.remove('menu-open');
-            
-            // Esconde todas as páginas
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(p => p.classList.remove('active'));
-
-            // Mostra a escolhida
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
         }
 
-        // --- LÓGICA DO GAYDAR ---
+        // --- GAYDAR ---
         function calcularGaydar() {
             const nomeInput = document.getElementById('g-name').value.trim().toLowerCase();
             const resultDiv = document.getElementById('resultado-gaydar');
             const porcentagemTxt = document.getElementById('porcentagem-txt');
 
-            if (nomeInput === "") {
-                alert("Digite o nome do suspeito!");
-                return;
-            }
+            if (nomeInput === "") { alert("Digite o nome!"); return; }
 
-            // Lista dos 100%
             const listaGays = ['guilherme', 'solda', 'josé', 'jose', 'portugal'];
+            const listaQuaseHetero = ['fabrício', 'fabricio', 'trili'];
 
             let porcentagem = 0;
+            let checkGay = false;
+            let checkHetero = false;
 
-            // Verifica se o nome está na lista (procura parcial ou exata)
-            // Se o nome contém "solda" (ex: lucas solda), também pega
-            let ehGayConfirmado = false;
-            listaGays.forEach(nome => {
-                if (nomeInput.includes(nome)) ehGayConfirmado = true;
-            });
+            listaGays.forEach(nome => { if (nomeInput.includes(nome)) checkGay = true; });
+            listaQuaseHetero.forEach(nome => { if (nomeInput.includes(nome)) checkHetero = true; });
 
-            if (ehGayConfirmado) {
-                porcentagem = 100;
-            } else {
-                // Sorteia entre 0 e 99
-                porcentagem = Math.floor(Math.random() * 100);
-            }
+            if (checkGay) { porcentagem = 100; }
+            else if (checkHetero) { porcentagem = Math.floor(Math.random() * 11); } // 0 a 10
+            else { porcentagem = Math.floor(Math.random() * 100); }
 
-            // Mostra o resultado
             resultDiv.style.display = 'block';
             porcentagemTxt.innerText = porcentagem + '%';
             
             if(porcentagem === 100) {
-                porcentagemTxt.style.color = "#ff0000";
-                porcentagemTxt.style.textShadow = "0 0 10px yellow";
+                porcentagemTxt.style.color = "#ff0000"; porcentagemTxt.style.textShadow = "0 0 10px yellow";
             } else {
-                porcentagemTxt.style.color = "#ff00d4";
-                porcentagemTxt.style.textShadow = "none";
+                porcentagemTxt.style.color = "#ff00d4"; porcentagemTxt.style.textShadow = "none";
             }
         }
 
-        // --- LÓGICA DO ANÚNCIO (MANTIDA) ---
+        // --- LÓGICA DO TERMO ---
+        const TARGET_WORD = "SOLDA";
+        let currentRow = 0;
+        let currentTile = 0;
+        const rows = 6;
+        const cols = 5;
+        let guesses = [
+            ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""],
+            ["", "", "", "", ""], ["", "", "", "", ""], ["", "", "", "", ""]
+        ];
+
+        // Cria o tabuleiro ao carregar
+        const boardDiv = document.getElementById('termo-board');
+        for (let r = 0; r < rows; r++) {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'termo-row';
+            for (let c = 0; c < cols; c++) {
+                const box = document.createElement('div');
+                box.className = 'termo-box';
+                box.id = `box-${r}-${c}`;
+                rowDiv.appendChild(box);
+            }
+            boardDiv.appendChild(rowDiv);
+        }
+
+        function pressKey(key) {
+            if (currentRow >= rows) return; // Jogo acabou
+
+            if (key === 'DEL') {
+                if (currentTile > 0) {
+                    currentTile--;
+                    guesses[currentRow][currentTile] = "";
+                    updateBoard();
+                }
+            } else if (key === 'ENTER') {
+                if (currentTile === 5) {
+                    checkRow();
+                }
+            } else {
+                if (currentTile < 5) {
+                    guesses[currentRow][currentTile] = key;
+                    currentTile++;
+                    updateBoard();
+                }
+            }
+        }
+
+        function updateBoard() {
+            for (let c = 0; c < 5; c++) {
+                const box = document.getElementById(`box-${currentRow}-${c}`);
+                box.innerText = guesses[currentRow][c];
+            }
+        }
+
+        function checkRow() {
+            const guess = guesses[currentRow].join("");
+            const rowDiv = document.getElementById('termo-board').children[currentRow];
+            
+            // Colore as caixas
+            for (let i = 0; i < 5; i++) {
+                const letter = guesses[currentRow][i];
+                const box = document.getElementById(`box-${currentRow}-${i}`);
+                
+                if (letter === TARGET_WORD[i]) {
+                    box.classList.add('correct');
+                } else if (TARGET_WORD.includes(letter)) {
+                    box.classList.add('present');
+                } else {
+                    box.classList.add('absent');
+                }
+            }
+
+            if (guess === TARGET_WORD) {
+                // Ganhou
+                document.getElementById('termo-msg').style.display = 'block';
+                currentRow = rows + 1; // Trava o jogo
+            } else {
+                // Passa pra próxima linha
+                currentRow++;
+                currentTile = 0;
+                if (currentRow >= rows) {
+                    alert("Perdeu! A palavra era SOLDA (óbvio).");
+                }
+            }
+        }
+
+        // --- ANUNCIO (30 SEGUNDOS) ---
         const listaDeAmigos = ["foto1.png", "foto2.png", "foto3.jpg"];
         const overlay = document.getElementById('overlay-safado');
         const imagemTag = document.getElementById('img-do-anuncio');
-
         function dispararAnuncio() {
             const indice = Math.floor(Math.random() * listaDeAmigos.length);
             imagemTag.src = listaDeAmigos[indice];
             overlay.style.display = 'block'; 
         }
         function fecharPopup() { overlay.style.display = 'none'; }
+        
         setTimeout(dispararAnuncio, 4000); 
-        setInterval(dispararAnuncio, 180000); 
+        setInterval(dispararAnuncio, 30000); // 30.000ms = 30 segundos
 
-        // --- LÓGICA DO AUDIO (MANTIDA) ---
+        // --- AUDIO ---
         const audio = document.getElementById('myAudio');
         const playBtn = document.getElementById('playBtn');
         const iconPlay = document.getElementById('icon-play');
         const iconPause = document.getElementById('icon-pause');
         const slider = document.getElementById('seekSlider');
         const timeDisplay = document.getElementById('timeDisplay');
-
         function toggleAudio() {
-            if (audio.paused) {
-                audio.play(); iconPlay.style.display = 'none'; iconPause.style.display = 'block';
-            } else {
-                audio.pause(); iconPlay.style.display = 'block'; iconPause.style.display = 'none';
-            }
+            if (audio.paused) { audio.play(); iconPlay.style.display = 'none'; iconPause.style.display = 'block'; } 
+            else { audio.pause(); iconPlay.style.display = 'block'; iconPause.style.display = 'none'; }
         }
         audio.addEventListener('timeupdate', () => {
             const porcentagem = (audio.currentTime / audio.duration) * 100;
@@ -334,13 +459,8 @@
             if (secs < 10) secs = '0' + secs;
             timeDisplay.innerText = mins + ':' + secs;
         });
-        slider.addEventListener('input', () => {
-            const tempo = (slider.value / 100) * audio.duration;
-            audio.currentTime = tempo;
-        });
-        audio.addEventListener('ended', () => {
-            iconPlay.style.display = 'block'; iconPause.style.display = 'none'; slider.value = 0;
-        });
+        slider.addEventListener('input', () => { audio.currentTime = (slider.value / 100) * audio.duration; });
+        audio.addEventListener('ended', () => { iconPlay.style.display = 'block'; iconPause.style.display = 'none'; slider.value = 0; });
     </script>
 </body>
 </html>
