@@ -3,181 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aguarde...</title>
+    <title>Página do Solda</title>
     <style>
-        /* --- SEU CSS ORIGINAL (Mantido) --- */
+        /* --- RESET BÁSICO --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            background-color: #222;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            cursor: url('MiddleFinger.png'), auto;
-            overflow: hidden;
+            background-color: #000; /* Fundo Preto */
+            color: #fff; /* Texto Branco */
+            font-family: Arial, sans-serif; /* Fonte limpa para leitura */
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+            cursor: url('MiddleFinger.png'), auto; /* Mantendo o cursor */
         }
 
-        h1.intro-text {
-            font-size: 3em;
-            text-transform: uppercase;
-            animation: piscar 0.5s infinite alternate;
-        }
-
-        @keyframes piscar {
-            from { opacity: 1; }
-            to { opacity: 0.3; }
-        }
-
-        /* --- NOVO CSS DO ANÚNCIO (Modificado) --- */
-        
-        /* O container agora fica no canto e não cobre a tela */
-        #overlay-safado {
-            display: none; /* Começa escondido */
+        /* --- FAIXA LATERAL (MENU FUTURO) --- */
+        #sidebar-strip {
             position: fixed;
-            bottom: 20px; /* 20px da parte de baixo */
-            right: 20px;  /* 20px da direita */
-            z-index: 9998;
-            /* Removido o fundo preto e a centralização */
+            top: 0;
+            left: 0;
+            width: 50px; /* Largura da faixa */
+            height: 100vh;
+            background-color: #333; /* Cinza escuro para diferenciar */
+            border-right: 1px solid #555;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl; /* Texto deitado se quiser escrever algo */
+            text-orientation: mixed;
         }
 
-        /* A caixa do anúncio com novo estilo */
-        .anuncio-box {
-            background-color: #ffec00; /* Amarelo */
-            border: 4px solid #cc0000; /* Borda vermelha simples */
+        /* --- CONTEÚDO PRINCIPAL (Empurrado para a direita) --- */
+        #main-container {
+            margin-left: 50px; /* Espaço para a faixa lateral não cobrir o texto */
+            width: calc(100% - 50px);
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            background-color: #ff00d4; /* Rosa */
+            color: #0000ff; /* Azul */
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Texto num canto, imagem no outro */
+            border-bottom: 3px solid #0000ff;
+        }
+
+        .header-text {
+            width: 70%;
+        }
+
+        .header-text h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .header-img {
+            width: 150px;
+            height: 150px;
+            background-color: #fff; /* Placeholder branco caso não tenha imagem */
+            border: 4px solid #0000ff;
+            object-fit: cover;
+        }
+
+        /* --- SEÇÕES EM ZIG-ZAG --- */
+        .content-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            gap: 40px; /* Espaço entre texto e imagem */
+            min-height: 400px;
+            border-bottom: 1px solid #333;
+        }
+
+        /* Classe para inverter a ordem (Texto na Esquerda, Imagem na Direita) */
+        .reverse {
+            flex-direction: row-reverse;
+        }
+
+        .text-box {
+            flex: 1; /* Ocupa metade */
             padding: 20px;
-            max-width: 350px; /* Um pouco menor */
+            font-size: 1.1rem;
+            line-height: 1.6;
+            border: 1px solid #fff; /* Caixinha de texto bordada */
+        }
+
+        .content-img {
+            flex: 1; /* Ocupa a outra metade */
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border: 2px solid #555;
+            background-color: #222;
+        }
+
+        /* --- CSS DO ANÚNCIO (POP-UP) --- */
+        #overlay-safado {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9998;
+        }
+
+        .anuncio-box {
+            background-color: #ffec00;
+            border: 4px solid #cc0000;
+            padding: 20px;
+            max-width: 350px;
             text-align: center;
-            color: #000; /* Texto preto para ler melhor */
+            color: #000;
             font-family: 'Impact', sans-serif;
             position: relative;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3); /* Sombra suave */
-            /* REMOVIDA A ANIMAÇÃO DE TREMER */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* Títulos */
-        .anuncio-box h2 {
-            font-size: 2rem;
-            margin: 0;
-            text-transform: uppercase;
-            color: #cc0000; /* Vermelho escuro */
-            /* Removida a sombra de texto pesada */
-        }
-        
-        .anuncio-box h3 {
-            color: #cc0000;
-            background: none; /* Sem fundo vermelho */
-            display: block;
-            padding: 5px 0;
-            margin-top: 5px;
-            font-size: 1.2rem;
-        }
+        .anuncio-box h2 { font-size: 2rem; margin: 0; color: #cc0000; text-transform: uppercase; }
+        .anuncio-box h3 { color: #cc0000; margin-top: 5px; font-size: 1.2rem; }
 
-        /* A foto */
         .foto-vitima {
-            width: 200px; /* Imagem menor */
-            height: 200px;
-            object-fit: cover;
-            border: 3px solid #cc0000;
-            margin: 15px auto;
-            display: block;
-            background-color: #fff;
+            width: 200px; height: 200px; object-fit: cover; border: 3px solid #cc0000; margin: 15px auto; display: block; background-color: #fff;
         }
 
-        /* Botão REAL de fechar */
         .close-btn {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: #cc0000;
-            color: white;
-            width: 35px;
-            height: 35px;
-            line-height: 35px;
-            border-radius: 50%;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            cursor: pointer;
-            border: 2px solid white;
-            z-index: 9999;
-            font-size: 18px;
+            position: absolute; top: -15px; right: -15px; background: #cc0000; color: white; width: 35px; height: 35px; line-height: 35px; border-radius: 50%;
+            font-family: Arial, sans-serif; font-weight: bold; cursor: pointer; border: 2px solid white; z-index: 9999; font-size: 18px;
         }
         
-        .close-btn:hover {
-            background-color: red;
-        }
+        .close-btn:hover { background-color: red; }
         
-        /* O botão grande de clique */
         .btn-clique {
-            padding: 10px 20px;
-            font-size: 18px;
-            background: #cc0000;
-            color: yellow;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
+            padding: 10px 20px; font-size: 18px; background: #cc0000; color: yellow; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; width: 100%;
         }
-        
-        /* REMOVIDO O @KEYFRAMES TREMER */
+
+        /* Responsividade para celular: empilha tudo */
+        @media (max-width: 768px) {
+            .content-section, .reverse { flex-direction: column; text-align: center; }
+            .header-text h1 { font-size: 2rem; }
+            header { flex-direction: column; text-align: center; gap: 20px; }
+            .header-text { width: 100%; }
+            #main-container { margin-left: 40px; width: calc(100% - 40px); }
+            #sidebar-strip { width: 40px; }
+        }
     </style>
 </head>
 <body>
 
-    <div>
-        <h1 class="intro-text">Sistema Carregando...</h1>
-        <p>(Não feche a página, Solda)</p>
+    <div id="sidebar-strip">
+        <span style="color: #555; font-size: 20px;">☰</span>
+    </div>
+
+    <div id="main-container">
+        
+        <header>
+            <div class="header-text">
+                <h1>Bem-vindo ao Mundo do Solda</h1>
+                <p>Aqui você coloca aquele texto introdutório bacana e grande, mas nem tanto.</p>
+            </div>
+            <img src="solda_header.jpg" alt="Header" class="header-img">
+        </header>
+
+        <section class="content-section">
+            <img src="solda1.jpg" alt="Foto 1" class="content-img">
+            <div class="text-box">
+                <h2>O Começo de Tudo</h2>
+                <p>Escreva aqui o texto referente à primeira imagem. Pode contar uma história, uma piada interna ou explicar o que é essa foto ao lado.</p>
+            </div>
+        </section>
+
+        <section class="content-section reverse">
+            <img src="solda2.jpg" alt="Foto 2" class="content-img">
+            <div class="text-box">
+                <h2>Momentos de Glória</h2>
+                <p>Aqui o texto fica na esquerda. Ideal para dar uma dinâmica na leitura. Coloque aqui a descrição da segunda foto.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <img src="solda3.jpg" alt="Foto 3" class="content-img">
+            <div class="text-box">
+                <h2>A Lenda Continua</h2>
+                <p>Terceira e última seção da página inicial. Encerre com chave de ouro ou direcione o usuário para os minigames no menu.</p>
+            </div>
+        </section>
+
     </div>
 
     <div id="overlay-safado">
         <div class="anuncio-box">
             <div class="close-btn" onclick="fecharPopup()">X</div>
+            <h2>ALERTA DE GATO!</h2>
+            <h3>SOLTEIROS DISPONÍVEIS</h3>
             
-            <h2>ALERTA DE VIADO!</h2>
-            <h3>SOLTEIROS DISPONÍVEIS A 500M</h3>
-            
-            <img id="img-do-anuncio" src="foto1.jpg" alt="Garanhão da Região" class="foto-vitima">
+            <img id="img-do-anuncio" src="" alt="Garanhão" class="foto-vitima">
             
             <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">"Adoro homens másculos..."</p>
             
-            <button class="btn-clique">CLIQUE PARA VER O PERFIL</button>
+            <button class="btn-clique" onclick="window.open('https://www.instagram.com/seu_amigo', '_blank')">
+                CLIQUE PARA VER O PERFIL
+            </button>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURAÇÃO ---
-
-        // LISTA DE FOTOS (Nomes exatos dos arquivos)
+        // --- LÓGICA DO ANÚNCIO ---
         const listaDeAmigos = [
-            "foto1.png",
-            "foto2.png",
-            "foto3.jpg"
+            "foto1.jpg", "foto2.jpg", "foto3.png" // LEMBRE DE CONFERIR OS NOMES
         ];
 
         const overlay = document.getElementById('overlay-safado');
         const imagemTag = document.getElementById('img-do-anuncio');
 
-        // Mostra o anúncio e sorteia a foto
         function dispararAnuncio() {
             const indice = Math.floor(Math.random() * listaDeAmigos.length);
             imagemTag.src = listaDeAmigos[indice];
-            // Muda para 'block' pois não usamos mais flexbox para centralizar
             overlay.style.display = 'block'; 
-            console.log("Anúncio disparado: " + listaDeAmigos[indice]);
         }
 
-        // --- FUNÇÃO DE FECHAR ---
         function fecharPopup() {
             overlay.style.display = 'none';
         }
 
-        // --- TIMERS ---
-        setTimeout(dispararAnuncio, 4000); // 4 segundos iniciais
-        setInterval(dispararAnuncio, 180000); // Repete a cada 3 minutos
-
+        // Timers
+        setTimeout(dispararAnuncio, 4000); 
+        setInterval(dispararAnuncio, 180000); 
     </script>
 </body>
 </html>
