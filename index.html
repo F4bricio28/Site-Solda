@@ -102,6 +102,16 @@
         }
         .maze-title { font-size: 2rem; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
         
+        /* PLACAR DO LABIRINTO */
+        .maze-stats {
+            background: #222; border: 1px solid #555; padding: 10px 20px;
+            border-radius: 8px; margin-bottom: 15px; display: flex; gap: 20px;
+            font-size: 1.2rem; font-weight: bold;
+        }
+        .stat-box span { color: var(--cor-rosa-novo); }
+        .new-record { color: #00ff00 !important; animation: piscarRecord 0.5s infinite; }
+        @keyframes piscarRecord { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
         #maze {
             display: grid; 
             grid-template-columns: repeat(10, 35px); 
@@ -121,9 +131,8 @@
         .wall-bottom { border-bottom: 2px solid #777; }
         .wall-left { border-left: 2px solid #777; }
 
-        /* Ícone do Jogador (AGORA USA O ÍCONE DA PÁGINA) */
         .player {
-            background-image: url('icone.png'); /* ARQUIVO DO ÍCONE */
+            background-image: url('icone.png'); 
             background-size: cover; width: 80%; height: 80%;
             position: absolute; top: 10%; left: 10%; z-index: 10;
         }
@@ -149,7 +158,6 @@
         .delivery-tracker {
             background: #111; padding: 20px; margin-top: 20px; border-top: 1px solid #333;
             text-align: center; position: relative; overflow: hidden;
-            /* Margem extra no final da página inicial */
             margin-bottom: 50px; 
         }
         .track-line {
@@ -162,10 +170,7 @@
             transition: left 0.5s linear; 
         }
         @keyframes driving { 0% { left: 0%; } 100% { left: 100%; } }
-        
-        /* VELOCIDADE ALTERADA AQUI: 120s = 2 minutos */
         .moving { animation: driving 120s linear infinite; }
-        
         .delivery-status { font-size: 1.2rem; font-weight: bold; color: #aaa; text-transform: uppercase; }
         .delivery-status.done { color: #00ff00; }
 
@@ -286,6 +291,12 @@
     <div id="page-labirinto" class="page-content">
         <div class="maze-container">
             <h1 class="maze-title">AJUDE O SOLDA A CHEGAR NO SEU OBJETIVO</h1>
+            
+            <div class="maze-stats">
+                <div class="stat-box">Tempo: <span id="curr-time">0.0s</span></div>
+                <div class="stat-box">Recorde: <span id="best-time">--</span></div>
+            </div>
+
             <div id="maze"></div>
             <div class="controls">
                 <div></div><div class="ctrl-btn" onclick="movePlayer(0, -1)">▲</div><div></div>
@@ -347,11 +358,30 @@
             else { porcentagemTxt.style.color = "#ff00d4"; porcentagemTxt.style.textShadow = "none"; }
         }
 
-        // Labirinto
+        // --- LABIRINTO COM TIMER ---
         const cols = 10; const rows = 10;
         let mazeGrid = []; let playerPos = {x: 0, y: 0};
         
+        // Variáveis do Timer
+        let mazeTimer = null;
+        let mazeStartTime = 0;
+        let gameActive = false;
+        let firstMove = false;
+        
         function initMaze() {
+            // Reseta o jogo e o timer
+            clearInterval(mazeTimer);
+            gameActive = true;
+            firstMove = false;
+            
+            document.getElementById('curr-time').innerText = "0.0s";
+            
+            // Carrega o recorde salvo
+            const savedRecord = localStorage.getItem('soldaMazeRecord');
+            const recordDisplay = document.getElementById('best-time');
+            recordDisplay.innerText = savedRecord ? savedRecord + "s" : "--";
+            recordDisplay.classList.remove('new-record'); // Tira o brilho de recorde novo
+
             const mazeEl = document.getElementById('maze'); mazeEl.innerHTML = ''; mazeGrid = [];
             for(let y=0; y<rows; y++) {
                 let row = [];
@@ -407,6 +437,8 @@
         }
 
         function movePlayer(dx, dy) {
+            if (!gameActive) return; // Se acabou, não mexe mais
+
             const currentCell = mazeGrid[playerPos.y][playerPos.x];
             let canMove = false;
             if (dx === 1 && !currentCell.walls.right) canMove = true;
@@ -415,10 +447,41 @@
             if (dy === -1 && !currentCell.walls.top) canMove = true;
 
             if (canMove) {
+                // PRIMEIRO MOVIMENTO: Inicia o cronômetro
+                if (!firstMove) {
+                    firstMove = true;
+                    mazeStartTime = Date.now();
+                    mazeTimer = setInterval(() => {
+                        const now = Date.now();
+                        const diff = (now - mazeStartTime) / 1000;
+                        document.getElementById('curr-time').innerText = diff.toFixed(1) + "s";
+                    }, 100);
+                }
+
                 playerPos.x += dx; playerPos.y += dy;
                 drawEntity(playerPos.x, playerPos.y, 'player');
+
+                // VITÓRIA
                 if (playerPos.x === cols-1 && playerPos.y === rows-1) {
-                    setTimeout(() => { initMaze(); }, 500);
+                    clearInterval(mazeTimer); // Para o relógio
+                    gameActive = false; // Trava o jogo
+
+                    // Calcula tempo final
+                    const finalTime = ((Date.now() - mazeStartTime) / 1000).toFixed(1);
+                    document.getElementById('curr-time').innerText = finalTime + "s";
+
+                    // Verifica Recorde
+                    let currentRecord = localStorage.getItem('soldaMazeRecord');
+                    if (!currentRecord || parseFloat(finalTime) < parseFloat(currentRecord)) {
+                        localStorage.setItem('soldaMazeRecord', finalTime);
+                        
+                        const recDisplay = document.getElementById('best-time');
+                        recDisplay.innerText = finalTime + "s";
+                        recDisplay.classList.add('new-record'); // Efeito visual
+                        alert("NOVO RECORDE: " + finalTime + "s!");
+                    }
+
+                    setTimeout(() => { initMaze(); }, 1500); // Demora um pouco pra reiniciar pra ver o tempo
                 }
             }
         }
