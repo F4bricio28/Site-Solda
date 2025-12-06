@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S O L D A</title>
+    <title>Aguarde...</title>
     <style>
-        /* --- SEU CSS ORIGINAL --- */
+        /* --- SEU CSS ORIGINAL (Mantido) --- */
         body {
             background-color: #222;
             color: #00ff00;
@@ -31,54 +31,57 @@
             to { opacity: 0.3; }
         }
 
-        /* --- CSS DO ANÚNCIO --- */
+        /* --- NOVO CSS DO ANÚNCIO (Modificado) --- */
+        
+        /* O container agora fica no canto e não cobre a tela */
         #overlay-safado {
             display: none; /* Começa escondido */
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            bottom: 20px; /* 20px da parte de baixo */
+            right: 20px;  /* 20px da direita */
             z-index: 9998;
-            justify-content: center;
-            align-items: center;
+            /* Removido o fundo preto e a centralização */
         }
 
+        /* A caixa do anúncio com novo estilo */
         .anuncio-box {
-            background-color: #ffec00;
-            border: 10px solid #ff00d4;
-            padding: 30px;
-            max-width: 500px;
+            background-color: #ffec00; /* Amarelo */
+            border: 4px solid #cc0000; /* Borda vermelha simples */
+            padding: 20px;
+            max-width: 350px; /* Um pouco menor */
             text-align: center;
-            color: red;
+            color: #000; /* Texto preto para ler melhor */
             font-family: 'Impact', sans-serif;
             position: relative;
-            box-shadow: 0 0 50px #ff00d4, 0 0 20px #ffec00;
-            animation: tremer 0.2s infinite;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3); /* Sombra suave */
+            /* REMOVIDA A ANIMAÇÃO DE TREMER */
         }
 
+        /* Títulos */
         .anuncio-box h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin: 0;
             text-transform: uppercase;
-            text-shadow: 2px 2px 0px #000;
+            color: #cc0000; /* Vermelho escuro */
+            /* Removida a sombra de texto pesada */
         }
         
         .anuncio-box h3 {
-            background-color: red;
-            color: yellow;
-            display: inline-block;
-            padding: 5px;
-            margin-top: 10px;
+            color: #cc0000;
+            background: none; /* Sem fundo vermelho */
+            display: block;
+            padding: 5px 0;
+            margin-top: 5px;
+            font-size: 1.2rem;
         }
 
+        /* A foto */
         .foto-vitima {
-            width: 300px;
-            height: 300px;
+            width: 200px; /* Imagem menor */
+            height: 200px;
             object-fit: cover;
-            border: 5px solid red;
-            margin: 20px auto;
+            border: 3px solid #cc0000;
+            margin: 15px auto;
             display: block;
             background-color: #fff;
         }
@@ -86,39 +89,40 @@
         /* Botão REAL de fechar */
         .close-btn {
             position: absolute;
-            top: -20px;
-            right: -20px;
-            background: red;
+            top: -15px;
+            right: -15px;
+            background: #cc0000;
             color: white;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
             border-radius: 50%;
             font-family: Arial, sans-serif;
             font-weight: bold;
-            cursor: pointer; /* Cursor de mãozinha para indicar clique */
-            border: 3px solid white;
+            cursor: pointer;
+            border: 2px solid white;
             z-index: 9999;
+            font-size: 18px;
         }
         
         .close-btn:hover {
-            background-color: darkred;
-            transform: scale(1.1);
+            background-color: red;
         }
-
-        @keyframes tremer {
-             0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        
+        /* O botão grande de clique */
+        .btn-clique {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #cc0000;
+            color: yellow;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
         }
+        
+        /* REMOVIDO O @KEYFRAMES TREMER */
     </style>
 </head>
 <body>
@@ -135,11 +139,11 @@
             <h2>ALERTA DE GATO!</h2>
             <h3>SOLTEIROS DISPONÍVEIS A 500M</h3>
             
-            <img id="img-do-anuncio" src="" alt="Garanhão da Região" class="foto-vitima">
+            <img id="img-do-anuncio" src="foto1.jpg" alt="Garanhão da Região" class="foto-vitima">
             
-            <p style="font-size: 1.5em; color: black; font-weight: bold;">"Adoro homens másculos..."</p>
+            <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">"Adoro homens másculos..."</p>
             
-            <button style="padding: 15px 30px; font-size: 20px; background: red; color: yellow; border: none; font-weight: bold; cursor: pointer; margin-top: 10px;">CLIQUE PARA VER O PERFIL COMPLETO</button>
+            <button class="btn-clique">CLIQUE PARA VER O PERFIL</button>
         </div>
     </div>
 
@@ -160,13 +164,13 @@
         function dispararAnuncio() {
             const indice = Math.floor(Math.random() * listaDeAmigos.length);
             imagemTag.src = listaDeAmigos[indice];
-            overlay.style.display = 'flex';
+            // Muda para 'block' pois não usamos mais flexbox para centralizar
+            overlay.style.display = 'block'; 
             console.log("Anúncio disparado: " + listaDeAmigos[indice]);
         }
 
-        // --- NOVA FUNÇÃO DE FECHAR ---
+        // --- FUNÇÃO DE FECHAR ---
         function fecharPopup() {
-            // Apenas esconde a div, sem pegadinhas
             overlay.style.display = 'none';
         }
 
