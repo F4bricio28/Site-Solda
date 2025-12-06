@@ -15,14 +15,13 @@
             color: #fff;
             font-family: Arial, sans-serif;
             overflow-x: hidden;
-            /* Cursor personalizado mantido */
             cursor: url('MiddleFinger.png'), auto;
         }
 
         /* --- CORES --- */
         :root {
-            --cor-rosa-novo: #DC143C; /* Carmesim */
-            --cor-azul-novo: #006064; /* Azul Petróleo */
+            --cor-rosa-novo: #DC143C; 
+            --cor-azul-novo: #006064; 
         }
 
         /* --- MENUS E SIDEBAR --- */
@@ -99,14 +98,12 @@
         /* --- LABIRINTO (MAZE) --- */
         .maze-container {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; margin-top: 20px;
+            padding: 20px; margin-top: 20px; text-align: center;
         }
-        .maze-title { font-size: 2rem; color: #fff; margin-bottom: 10px; }
+        .maze-title { font-size: 2rem; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
         
-        /* O Grid do labirinto */
         #maze {
             display: grid; 
-            /* Tamanho de cada célula do labirinto */
             grid-template-columns: repeat(10, 35px); 
             grid-template-rows: repeat(10, 35px);
             border: 2px solid #fff;
@@ -119,36 +116,27 @@
             position: relative;
         }
 
-        /* Paredes do labirinto (controladas pelo JS) */
         .wall-top { border-top: 2px solid #777; }
         .wall-right { border-right: 2px solid #777; }
         .wall-bottom { border-bottom: 2px solid #777; }
         .wall-left { border-left: 2px solid #777; }
 
-        /* Ícone do Jogador */
+        /* Ícone do Jogador (AGORA USA O ÍCONE DA PÁGINA) */
         .player {
-            background-image: url('maze_player.png'); /* SEU ARQUIVO AQUI */
-            background-size: cover;
-            width: 80%; height: 80%;
-            position: absolute; top: 10%; left: 10%;
-            z-index: 10;
+            background-image: url('icone.png'); /* ARQUIVO DO ÍCONE */
+            background-size: cover; width: 80%; height: 80%;
+            position: absolute; top: 10%; left: 10%; z-index: 10;
         }
-        
-        /* Ícone do Objetivo */
+
         .goal {
-            background-image: url('maze_target.png'); /* SEU ARQUIVO AQUI */
-            background-size: cover;
-            width: 80%; height: 80%;
+            background-image: url('maze_target.png'); 
+            background-size: cover; width: 80%; height: 80%;
             position: absolute; top: 10%; left: 10%;
         }
 
-        /* Controles Mobile */
         .controls {
-            margin-top: 20px; margin-bottom: 50px; /* Margem extra pro menu não atrapalhar */
-            display: grid;
-            grid-template-columns: 60px 60px 60px;
-            grid-template-rows: 60px 60px;
-            gap: 10px;
+            margin-top: 20px; margin-bottom: 50px; 
+            display: grid; grid-template-columns: 60px 60px 60px; grid-template-rows: 60px 60px; gap: 10px;
         }
         .ctrl-btn {
             background: #444; color: #fff; border: 2px solid #777;
@@ -157,32 +145,31 @@
         }
         .ctrl-btn:active { background: var(--cor-rosa-novo); }
 
-        /* --- CAMINHÃO DE ENTREGA (TRACKER) --- */
+        /* --- CAMINHÃO DE ENTREGA --- */
         .delivery-tracker {
             background: #111; padding: 20px; margin-top: 20px; border-top: 1px solid #333;
             text-align: center; position: relative; overflow: hidden;
+            /* Margem extra no final da página inicial */
+            margin-bottom: 50px; 
         }
         .track-line {
             height: 4px; background: #555; width: 80%; margin: 40px auto 20px auto;
             position: relative; border-radius: 2px;
         }
         .track-line.arrived { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
-        
         .truck-icon {
             font-size: 30px; position: absolute; top: -22px; left: 0;
-            transition: left 0.5s linear; /* Movimento suave */
+            transition: left 0.5s linear; 
         }
-        /* Animação de andando (loop) */
-        @keyframes driving {
-            0% { left: 0%; } 100% { left: 100%; }
-        }
-        .moving { animation: driving 5s linear infinite; }
+        @keyframes driving { 0% { left: 0%; } 100% { left: 100%; } }
+        
+        /* VELOCIDADE ALTERADA AQUI: 120s = 2 minutos */
+        .moving { animation: driving 120s linear infinite; }
         
         .delivery-status { font-size: 1.2rem; font-weight: bold; color: #aaa; text-transform: uppercase; }
         .delivery-status.done { color: #00ff00; }
 
-
-        /* --- AUDIO & ANUNCIO (MANTIDOS) --- */
+        /* --- AUDIO & ANUNCIO --- */
         @keyframes tremer { 0% { transform: rotate(0deg); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } 100% { transform: rotate(0deg); } }
         
         .footer-audio { text-align: center; padding: 60px 20px; background-color: #000; border-top: 2px solid #333; }
@@ -256,13 +243,6 @@
             </div>
         </section>
 
-        <div class="delivery-tracker">
-            <div class="track-line" id="trackLine">
-                <div class="truck-icon" id="truckIcon">🚚</div>
-            </div>
-            <div class="delivery-status" id="deliveryText">Ta chegando, confia</div>
-        </div>
-
         <footer class="footer-audio">
             <p class="footer-text">O solda ja respondeu?:</p>
             <div class="whatsapp-player">
@@ -278,28 +258,23 @@
             </div>
             <audio id="myAudio" src="audio.mp3"></audio>
         </footer>
+
+        <div class="delivery-tracker">
+            <div class="track-line" id="trackLine">
+                <div class="truck-icon" id="truckIcon">🚚</div>
+            </div>
+            <div class="delivery-status" id="deliveryText">Ta chegando, confia</div>
+        </div>
     </div>
 
     <div id="page-gaydar" class="page-content">
         <div class="gaydar-container">
             <h1 class="gaydar-title">GAYDAR</h1> 
             <p style="margin-bottom: 20px;">Algoritmo avançado de detecção.</p>
-            
-            <div class="form-group">
-                <label>Nome:</label>
-                <input type="text" id="g-name">
-            </div>
-            <div class="form-group">
-                <label>Idade:</label>
-                <input type="number" id="g-age">
-            </div>
-            <div class="form-group">
-                <label>Curso:</label>
-                <input type="text" id="g-course">
-            </div>
-
+            <div class="form-group"><label>Nome:</label><input type="text" id="g-name"></div>
+            <div class="form-group"><label>Idade:</label><input type="number" id="g-age"></div>
+            <div class="form-group"><label>Curso:</label><input type="text" id="g-course"></div>
             <button class="btn-gaydar" onclick="calcularGaydar()">CALCULAR</button>
-
             <div id="resultado-gaydar">
                 <p>NÍVEL DETECTADO:</p>
                 <div id="porcentagem-txt">0%</div>
@@ -310,16 +285,11 @@
 
     <div id="page-labirinto" class="page-content">
         <div class="maze-container">
-            <h1 class="maze-title">LEVE O SOLDA</h1>
-            
-            <div id="maze">
-                </div>
-
+            <h1 class="maze-title">AJUDE O SOLDA A CHEGAR NO SEU OBJETIVO</h1>
+            <div id="maze"></div>
             <div class="controls">
-                <div></div> <div class="ctrl-btn" onclick="movePlayer(0, -1)">▲</div>
-                <div></div> <div class="ctrl-btn" onclick="movePlayer(-1, 0)">◀</div>
-                <div class="ctrl-btn" onclick="movePlayer(0, 1)">▼</div>
-                <div class="ctrl-btn" onclick="movePlayer(1, 0)">▶</div>
+                <div></div><div class="ctrl-btn" onclick="movePlayer(0, -1)">▲</div><div></div>
+                <div class="ctrl-btn" onclick="movePlayer(-1, 0)">◀</div><div class="ctrl-btn" onclick="movePlayer(0, 1)">▼</div><div class="ctrl-btn" onclick="movePlayer(1, 0)">▶</div>
             </div>
         </div>
     </div>
@@ -331,234 +301,147 @@
             <h3>SOLTEIROS DISPONÍVEIS</h3>
             <img id="img-do-anuncio" src="" alt="Garanhão" class="foto-vitima">
             <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">"Acha que tens oque é preciso para esbagaçares o meu Fuleco?"</p>
-            <button class="btn-clique" onclick="window.open('https://www.instagram.com/suspamigos', '_blank')">
-                CLIQUE PARA VER O PERFIL
-            </button>
+            <button class="btn-clique" onclick="window.open('https://www.instagram.com/suspamigos', '_blank')">CLIQUE PARA VER O PERFIL</button>
         </div>
     </div>
 
     <script>
-        // ==========================================================
-        // CONFIGURAÇÃO DO PRESENTE
-        // Mude para "true" quando chegar!
-        const presenteChegou = false;
-        // ==========================================================
+        const presenteChegou = false; 
 
-        // --- LÓGICA DO CAMINHÃO ---
+        // Caminhão
         const truckIcon = document.getElementById('truckIcon');
         const trackLine = document.getElementById('trackLine');
         const deliveryText = document.getElementById('deliveryText');
-
         if (presenteChegou) {
-            truckIcon.style.left = "95%"; // Fim da linha
-            truckIcon.classList.remove('moving');
-            trackLine.classList.add('arrived'); // Fica verde
-            deliveryText.innerText = "CHEGOU!";
-            deliveryText.classList.add('done');
+            truckIcon.style.left = "95%"; truckIcon.classList.remove('moving');
+            trackLine.classList.add('arrived'); deliveryText.innerText = "CHEGOU!"; deliveryText.classList.add('done');
         } else {
-            truckIcon.classList.add('moving'); // Animação loop
-            deliveryText.innerText = "Ta chegando, confia";
+            truckIcon.classList.add('moving'); deliveryText.innerText = "Ta chegando, confia";
         }
 
-        // --- NAVEGAÇÃO ---
+        // Navegação
         function toggleMenu() { document.getElementById('hidden-menu').classList.toggle('menu-open'); }
         function navigate(pageId) {
             document.getElementById('hidden-menu').classList.remove('menu-open');
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
-            
-            // Se abriu o labirinto, gera um novo
             if(pageId === 'labirinto') { initMaze(); }
         }
 
-        // --- GAYDAR ---
+        // Gaydar
         function calcularGaydar() {
             const nomeInput = document.getElementById('g-name').value.trim().toLowerCase();
             const resultDiv = document.getElementById('resultado-gaydar');
             const porcentagemTxt = document.getElementById('porcentagem-txt');
-
             if (nomeInput === "") { alert("Digite o nome!"); return; }
-
             const listaGays = ['guilherme', 'solda', 'josé', 'jose', 'portugal'];
             const listaQuaseHetero = ['fabrício', 'fabricio', 'trili'];
-
-            let porcentagem = 0;
-            let checkGay = false;
-            let checkHetero = false;
-
+            let porcentagem = 0; let checkGay = false; let checkHetero = false;
             listaGays.forEach(nome => { if (nomeInput.includes(nome)) checkGay = true; });
             listaQuaseHetero.forEach(nome => { if (nomeInput.includes(nome)) checkHetero = true; });
-
             if (checkGay) { porcentagem = 100; }
             else if (checkHetero) { porcentagem = Math.floor(Math.random() * 11); } 
             else { porcentagem = Math.floor(Math.random() * 100); }
-
-            resultDiv.style.display = 'block';
-            porcentagemTxt.innerText = porcentagem + '%';
-            
-            if(porcentagem === 100) {
-                porcentagemTxt.style.color = "#ff0000"; porcentagemTxt.style.textShadow = "0 0 10px yellow";
-            } else {
-                porcentagemTxt.style.color = "#ff00d4"; porcentagemTxt.style.textShadow = "none";
-            }
+            resultDiv.style.display = 'block'; porcentagemTxt.innerText = porcentagem + '%';
+            if(porcentagem === 100) { porcentagemTxt.style.color = "#ff0000"; porcentagemTxt.style.textShadow = "0 0 10px yellow"; } 
+            else { porcentagemTxt.style.color = "#ff00d4"; porcentagemTxt.style.textShadow = "none"; }
         }
 
-        // --- LABIRINTO (GERAÇÃO ALEATÓRIA) ---
-        const cols = 10;
-        const rows = 10;
-        let mazeGrid = [];
-        let playerPos = {x: 0, y: 0};
+        // Labirinto
+        const cols = 10; const rows = 10;
+        let mazeGrid = []; let playerPos = {x: 0, y: 0};
         
         function initMaze() {
-            const mazeEl = document.getElementById('maze');
-            mazeEl.innerHTML = ''; // Limpa
-            mazeGrid = [];
-            
-            // 1. Cria grid vazio
+            const mazeEl = document.getElementById('maze'); mazeEl.innerHTML = ''; mazeGrid = [];
             for(let y=0; y<rows; y++) {
                 let row = [];
                 for(let x=0; x<cols; x++) {
-                    row.push({
-                        x: x, y: y,
-                        visited: false,
-                        walls: {top: true, right: true, bottom: true, left: true}
-                    });
+                    row.push({x: x, y: y, visited: false, walls: {top: true, right: true, bottom: true, left: true}});
                 }
                 mazeGrid.push(row);
             }
-
-            // 2. Algoritmo DFS para gerar labirinto
-            let stack = [];
-            let current = mazeGrid[0][0];
-            current.visited = true;
-
+            let stack = []; let current = mazeGrid[0][0]; current.visited = true;
             while(true) {
                 let next = getUnvisitedNeighbor(current);
-                if (next) {
-                    next.visited = true;
-                    stack.push(current);
-                    removeWalls(current, next);
-                    current = next;
-                } else if (stack.length > 0) {
-                    current = stack.pop();
-                } else {
-                    break;
-                }
+                if (next) { next.visited = true; stack.push(current); removeWalls(current, next); current = next; } 
+                else if (stack.length > 0) { current = stack.pop(); } 
+                else { break; }
             }
-
-            // 3. Desenha na tela
             for(let y=0; y<rows; y++) {
                 for(let x=0; x<cols; x++) {
-                    let cellDiv = document.createElement('div');
-                    cellDiv.className = 'cell';
-                    let cell = mazeGrid[y][x];
-                    
-                    if(cell.walls.top) cellDiv.classList.add('wall-top');
-                    if(cell.walls.right) cellDiv.classList.add('wall-right');
-                    if(cell.walls.bottom) cellDiv.classList.add('wall-bottom');
-                    if(cell.walls.left) cellDiv.classList.add('wall-left');
-
-                    cellDiv.id = `cell-${x}-${y}`;
-                    mazeEl.appendChild(cellDiv);
+                    let cellDiv = document.createElement('div'); cellDiv.className = 'cell'; let cell = mazeGrid[y][x];
+                    if(cell.walls.top) cellDiv.classList.add('wall-top'); if(cell.walls.right) cellDiv.classList.add('wall-right');
+                    if(cell.walls.bottom) cellDiv.classList.add('wall-bottom'); if(cell.walls.left) cellDiv.classList.add('wall-left');
+                    cellDiv.id = `cell-${x}-${y}`; mazeEl.appendChild(cellDiv);
                 }
             }
-
-            // 4. Posiciona Player e Goal
             playerPos = {x: 0, y: 0};
             drawEntity(playerPos.x, playerPos.y, 'player');
             drawEntity(cols-1, rows-1, 'goal');
         }
 
         function getUnvisitedNeighbor(cell) {
-            let neighbors = [];
-            let x = cell.x; let y = cell.y;
-            
-            if (y > 0 && !mazeGrid[y-1][x].visited) neighbors.push(mazeGrid[y-1][x]); // Top
-            if (x < cols-1 && !mazeGrid[y][x+1].visited) neighbors.push(mazeGrid[y][x+1]); // Right
-            if (y < rows-1 && !mazeGrid[y+1][x].visited) neighbors.push(mazeGrid[y+1][x]); // Bottom
-            if (x > 0 && !mazeGrid[y][x-1].visited) neighbors.push(mazeGrid[y][x-1]); // Left
-
-            if (neighbors.length > 0) {
-                return neighbors[Math.floor(Math.random() * neighbors.length)];
-            }
+            let neighbors = []; let x = cell.x; let y = cell.y;
+            if (y > 0 && !mazeGrid[y-1][x].visited) neighbors.push(mazeGrid[y-1][x]);
+            if (x < cols-1 && !mazeGrid[y][x+1].visited) neighbors.push(mazeGrid[y][x+1]);
+            if (y < rows-1 && !mazeGrid[y+1][x].visited) neighbors.push(mazeGrid[y+1][x]);
+            if (x > 0 && !mazeGrid[y][x-1].visited) neighbors.push(mazeGrid[y][x-1]);
+            if (neighbors.length > 0) return neighbors[Math.floor(Math.random() * neighbors.length)];
             return undefined;
         }
 
         function removeWalls(a, b) {
-            let xDiff = a.x - b.x;
-            if (xDiff === 1) { a.walls.left = false; b.walls.right = false; }
-            else if (xDiff === -1) { a.walls.right = false; b.walls.left = false; }
-            
-            let yDiff = a.y - b.y;
-            if (yDiff === 1) { a.walls.top = false; b.walls.bottom = false; }
-            else if (yDiff === -1) { a.walls.bottom = false; b.walls.top = false; }
+            let xDiff = a.x - b.x; if (xDiff === 1) { a.walls.left = false; b.walls.right = false; } else if (xDiff === -1) { a.walls.right = false; b.walls.left = false; }
+            let yDiff = a.y - b.y; if (yDiff === 1) { a.walls.top = false; b.walls.bottom = false; } else if (yDiff === -1) { a.walls.bottom = false; b.walls.top = false; }
         }
 
         function drawEntity(x, y, className) {
-            // Remove anterior se for player
             if(className === 'player') {
                 const old = document.querySelector('.player');
                 if(old) old.remove();
             }
-            
             const cell = document.getElementById(`cell-${x}-${y}`);
             const entity = document.createElement('div');
             entity.className = className;
             cell.appendChild(entity);
         }
 
-        // Movimento (Teclado e Botões)
         function movePlayer(dx, dy) {
             const currentCell = mazeGrid[playerPos.y][playerPos.x];
             let canMove = false;
-
             if (dx === 1 && !currentCell.walls.right) canMove = true;
             if (dx === -1 && !currentCell.walls.left) canMove = true;
             if (dy === 1 && !currentCell.walls.bottom) canMove = true;
             if (dy === -1 && !currentCell.walls.top) canMove = true;
 
             if (canMove) {
-                playerPos.x += dx;
-                playerPos.y += dy;
+                playerPos.x += dx; playerPos.y += dy;
                 drawEntity(playerPos.x, playerPos.y, 'player');
-
-                // Checa vitória
                 if (playerPos.x === cols-1 && playerPos.y === rows-1) {
-                    setTimeout(() => { 
-                        alert("SOLDA ENCONTROU O OBJETO PROIBIDO! (Fase Concluída)"); 
-                        initMaze(); // Reinicia
-                    }, 100);
+                    setTimeout(() => { initMaze(); }, 500);
                 }
             }
         }
 
-        // Teclas do Teclado
         document.addEventListener('keydown', (e) => {
-            // Só mexe se a aba labirinto estiver ativa
             if (!document.getElementById('page-labirinto').classList.contains('active')) return;
-            
             if (e.key === "ArrowUp") movePlayer(0, -1);
             if (e.key === "ArrowDown") movePlayer(0, 1);
             if (e.key === "ArrowLeft") movePlayer(-1, 0);
             if (e.key === "ArrowRight") movePlayer(1, 0);
         });
 
-
-        // --- ANUNCIO (30s) ---
+        // Anuncio & Audio
         const listaDeAmigos = ["foto1.png", "foto2.png", "foto3.jpg"];
         const overlay = document.getElementById('overlay-safado');
         const imagemTag = document.getElementById('img-do-anuncio');
         function dispararAnuncio() {
             const indice = Math.floor(Math.random() * listaDeAmigos.length);
-            imagemTag.src = listaDeAmigos[indice];
-            overlay.style.display = 'block'; 
+            imagemTag.src = listaDeAmigos[indice]; overlay.style.display = 'block'; 
         }
         function fecharPopup() { overlay.style.display = 'none'; }
-        
-        setTimeout(dispararAnuncio, 4000); 
-        setInterval(dispararAnuncio, 30000); 
+        setTimeout(dispararAnuncio, 4000); setInterval(dispararAnuncio, 30000); 
 
-        // --- AUDIO ---
         const audio = document.getElementById('myAudio');
         const playBtn = document.getElementById('playBtn');
         const iconPlay = document.getElementById('icon-play');
@@ -572,10 +455,8 @@
         audio.addEventListener('timeupdate', () => {
             const porcentagem = (audio.currentTime / audio.duration) * 100;
             slider.value = porcentagem || 0;
-            let mins = Math.floor(audio.currentTime / 60);
-            let secs = Math.floor(audio.currentTime % 60);
-            if (secs < 10) secs = '0' + secs;
-            timeDisplay.innerText = mins + ':' + secs;
+            let mins = Math.floor(audio.currentTime / 60); let secs = Math.floor(audio.currentTime % 60);
+            if (secs < 10) secs = '0' + secs; timeDisplay.innerText = mins + ':' + secs;
         });
         slider.addEventListener('input', () => { audio.currentTime = (slider.value / 100) * audio.duration; });
         audio.addEventListener('ended', () => { iconPlay.style.display = 'block'; iconPause.style.display = 'none'; slider.value = 0; });
