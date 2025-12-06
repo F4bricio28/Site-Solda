@@ -3,27 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo ao Caos</title>
+    <title>Aguarde...</title>
     <style>
+        /* --- SEU CSS ORIGINAL --- */
         body {
-            /* Uma cor de fundo escura para destacar o cursor */
             background-color: #222;
-            color: #00ff00; /* Texto verde estilo hacker */
-            font-family: 'Courier New', Courier, monospace; /* Fonte de terminal */
-            height: 100vh; /* Garante que a página ocupe a tela toda */
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-
-            /* --- A MÁGICA DO CURSOR AQUI --- */
-            /* O 'auto' no final é obrigatório como backup caso a imagem falhe */
-            /* Substitua o link dentro das aspas pelo link da sua imagem de dedo do meio */
             cursor: url('MiddleFinger.png'), auto;
+            overflow: hidden;
         }
 
-        h1 {
+        h1.intro-text {
             font-size: 3em;
             text-transform: uppercase;
             animation: piscar 0.5s infinite alternate;
@@ -33,12 +30,150 @@
             from { opacity: 1; }
             to { opacity: 0.3; }
         }
+
+        /* --- CSS DO ANÚNCIO --- */
+        #overlay-safado {
+            display: none; /* Começa escondido */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .anuncio-box {
+            background-color: #ffec00;
+            border: 10px solid #ff00d4;
+            padding: 30px;
+            max-width: 500px;
+            text-align: center;
+            color: red;
+            font-family: 'Impact', sans-serif;
+            position: relative;
+            box-shadow: 0 0 50px #ff00d4, 0 0 20px #ffec00;
+            animation: tremer 0.2s infinite;
+        }
+
+        .anuncio-box h2 {
+            font-size: 2.5rem;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+        }
+        
+        .anuncio-box h3 {
+            background-color: red;
+            color: yellow;
+            display: inline-block;
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .foto-vitima {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 5px solid red;
+            margin: 20px auto;
+            display: block;
+            background-color: #fff;
+        }
+
+        /* Botão REAL de fechar */
+        .close-btn {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: red;
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer; /* Cursor de mãozinha para indicar clique */
+            border: 3px solid white;
+            z-index: 9999;
+        }
+        
+        .close-btn:hover {
+            background-color: darkred;
+            transform: scale(1.1);
+        }
+
+        @keyframes tremer {
+             0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
     </style>
 </head>
 <body>
+
     <div>
-        <h1>Olha o mouse...</h1>
-        <p>(É com carinho)</p>
+        <h1 class="intro-text">Sistema Carregando...</h1>
+        <p>(Não feche a página, Solda)</p>
     </div>
+
+    <div id="overlay-safado">
+        <div class="anuncio-box">
+            <div class="close-btn" onclick="fecharPopup()">X</div>
+            
+            <h2>ALERTA DE GATO!</h2>
+            <h3>SOLTEIROS DISPONÍVEIS A 500M</h3>
+            
+            <img id="img-do-anuncio" src="" alt="Garanhão da Região" class="foto-vitima">
+            
+            <p style="font-size: 1.5em; color: black; font-weight: bold;">"Adoro homens másculos..."</p>
+            
+            <button style="padding: 15px 30px; font-size: 20px; background: red; color: yellow; border: none; font-weight: bold; cursor: pointer; margin-top: 10px;">CLIQUE PARA VER O PERFIL COMPLETO</button>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURAÇÃO ---
+
+        // LISTA DE FOTOS (Nomes exatos dos arquivos)
+        const listaDeAmigos = [
+            "foto1.jpg",
+            "foto2.jpg",
+            "foto3.png"
+        ];
+
+        const overlay = document.getElementById('overlay-safado');
+        const imagemTag = document.getElementById('img-do-anuncio');
+
+        // Mostra o anúncio e sorteia a foto
+        function dispararAnuncio() {
+            const indice = Math.floor(Math.random() * listaDeAmigos.length);
+            imagemTag.src = listaDeAmigos[indice];
+            overlay.style.display = 'flex';
+            console.log("Anúncio disparado: " + listaDeAmigos[indice]);
+        }
+
+        // --- NOVA FUNÇÃO DE FECHAR ---
+        function fecharPopup() {
+            // Apenas esconde a div, sem pegadinhas
+            overlay.style.display = 'none';
+        }
+
+        // --- TIMERS ---
+        setTimeout(dispararAnuncio, 4000); // 4 segundos iniciais
+        setInterval(dispararAnuncio, 180000); // Repete a cada 3 minutos
+
+    </script>
 </body>
 </html>
