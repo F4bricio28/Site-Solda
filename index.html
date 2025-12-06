@@ -3,45 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Mestre dos Magos</title> <style>
+    <title>Bem-vindo ao Caos</title>
+    <style>
         body {
-            background-color: #ffff00; /* Amarelo doer os olhos */
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* Essencial para memes */
+            /* Uma cor de fundo escura para destacar o cursor */
+            background-color: #222;
+            color: #00ff00; /* Texto verde estilo hacker */
+            font-family: 'Courier New', Courier, monospace; /* Fonte de terminal */
+            height: 100vh; /* Garante que a página ocupe a tela toda */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            color: blue;
+
+            /* --- A MÁGICA DO CURSOR AQUI --- */
+            /* O 'auto' no final é obrigatório como backup caso a imagem falhe */
+            /* Substitua o link dentro das aspas pelo link da sua imagem de dedo do meio */
+            cursor: url('https://cdn-icons-png.flaticon.com/32/8660/8660801.png'), auto;
         }
-        .container {
-            margin-top: 50px;
+
+        h1 {
+            font-size: 3em;
+            text-transform: uppercase;
+            animation: piscar 0.5s infinite alternate;
         }
-        img {
-            border: 5px dashed red;
-            width: 300px;
-            height: auto;
-        }
-        .pisca {
-            animation: piscar 1s infinite;
-            font-size: 2em;
-            color: red;
-        }
+
         @keyframes piscar {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
+            from { opacity: 1; }
+            to { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="pisca">⚠️ ALERTA DE GÊNIO ⚠️</h1>
-        
-        <img src="https://media1.tenor.com/m/mXk5rS8dCPEAAAAC/cat-cat-meme.gif" alt="Foto do Amigo">
-        
-        <h2>Este é [NOME DO AMIGO]</h2>
-        <p>Ele disse que sabia consertar a impressora...</p>
-        <p><i>"Confia, eu vi um tutorial no YouTube."</i></p>
-        
-        <br>
-        <button onclick="alert('Não tem volta, ele já quebrou tudo!')">Contratar Serviços</button>
+    <div>
+        <h1>Olha o mouse...</h1>
+        <p>(É com carinho)</p>
     </div>
 </body>
 </html>
